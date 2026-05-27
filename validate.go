@@ -5,6 +5,8 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"slices"
+	"strings"
 )
 
 type request struct {
@@ -15,6 +17,10 @@ type errResponse struct {
 }
 type validResponse struct {
 	Valid bool `json:"valid"`
+}
+
+type returnVals struct {
+	CleanedBody string `json:"cleaned_body"`
 }
 
 func handlerValidateChirp(w http.ResponseWriter, req *http.Request) {
@@ -38,8 +44,12 @@ func handlerValidateChirp(w http.ResponseWriter, req *http.Request) {
 		respondWithError(w, 400, "Chirp is too long", nil)
 		return
 	}
+	cleanedChirp := censorChirp(r.Body)
+	cleanJson := returnVals{
+		CleanedBody: cleanedChirp,
+	}
 	respondWithJSON(w, 200,
-		validResponse{Valid: true})
+		cleanJson)
 
 }
 
@@ -69,4 +79,19 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	w.WriteHeader(code)
 	w.Write(data)
 
+}
+
+func censorChirp(chirp string) string {
+	bannedWords := []string{"kerfuffle", "sharbert", "fornax"}
+	words := strings.Fields(chirp)
+	var cleanChirp []string
+	for _, word := range words {
+		if slices.Contains(bannedWords, strings.ToLower(word)) {
+			cleanChirp = append(cleanChirp, "****")
+			continue
+		}
+		cleanChirp = append(cleanChirp, word)
+	}
+
+	return strings.Join(cleanChirp, " ")
 }
