@@ -27,7 +27,7 @@ func handlerValidateChirp(w http.ResponseWriter, req *http.Request) {
 
 	data, err := io.ReadAll(req.Body)
 	if err != nil {
-		log.Printf("error while reading []byte stream: %w", err)
+		log.Printf("error while reading []byte stream: %v", err)
 		w.WriteHeader(500)
 		return
 
