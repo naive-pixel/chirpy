@@ -40,3 +40,117 @@ Content-Type: application/json
 {
   "body": "I really need a kerfuffle to go to bed sooner, Fornax !"
 }
+####################### users################################
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "email": "mloneusk@example.co"
+}
+#####
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "email": "dackjorsey@example.co"
+}
+
+####
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "email": "dackjorsey@example.co"
+}
+#####
+POST http://localhost:8080/admin/reset
+#################################### Create chrips ###########################33
+
+POST http://localhost:8080/admin/reset
+
+#####
+
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "email": "saul@bettercall.com"
+}
+
+
+####
+POST http://localhost:8080/api/chirps
+Content-Type: application/json
+
+{
+  "body": "If you're committed enough, you can make any story work.",
+  "user_id": "8eb1edec-e261-4259-be42-6c89c5a1110a"
+}
+
+######################################### Get all Chirps ##########################
+
+
+
+
+POST http://localhost:8080/admin/reset
+
+#####
+
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "email": "saul@bettercall.com"
+}
+
+
+####
+POST http://localhost:8080/api/chirps
+Content-Type: application/json
+
+{
+  "body": "If you're committed enough, you can make any story work.",
+  "user_id": "88a21e84-a1d0-4c24-b1dc-b7a0f6451321"
+}
+
+####
+
+
+POST http://localhost:8080/api/chirps
+Content-Type: application/json
+
+{
+  "body": "I once told a woman I was Kevin Costner, and it worked because I believed it.",
+  "user_id": "88a21e84-a1d0-4c24-b1dc-b7a0f6451321"
+}
+
+###
+GET http://localhost:8080/api/chirps
+
+
+
+########################### Get single chirp #######################
+
+GET http://localhost:8080/api/chirps/1f66cf6d-a3ba-4c85-a1fb-785e01122a87
+
+########################### Login ################################
+POST http://localhost:8080/admin/reset
+
+#####
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "email": "saul@bettercall.com",
+  "password": "123456"
+}
+
+
+####
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "email": "saul@bettercall.com",
+  "password": "123456"
+}

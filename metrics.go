@@ -23,15 +23,16 @@ func (acfg *apiConfig) getNumberOfRequestsHandler(w http.ResponseWriter, req *ht
 
 func (acfg *apiConfig) handlerReset(w http.ResponseWriter, req *http.Request) {
 	acfg.fileserverHits.Store(0)
+	acfg.db.Reset(req.Context())
 	w.Header().Add("Content-Type", "text/plain; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Reset counter"))
+	w.Write([]byte("Reset users table and hit counter."))
 }
 
 func (acfg *apiConfig) handlerMetrics(w http.ResponseWriter, req *http.Request) {
 	w.Header().Add("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
-	welcomePage := fmt.Sprintf("<html><body><h1>Welcome, Chirpy Admin</h1><p>Chirpy has been visited %d times!</p></body></html>",
-		acfg.fileserverHits.Load())
-	fmt.Fprintf(w, welcomePage)
+	welcomePage := []byte(fmt.Sprintf("<html><body><h1>Welcome, Chirpy Admin</h1><p>Chirpy has been visited %d times!</p></body></html>",
+		acfg.fileserverHits.Load()))
+	w.Write(welcomePage)
 }
